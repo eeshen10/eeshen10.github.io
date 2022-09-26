@@ -170,4 +170,11 @@ function dga3d(ch4_h2,c2h4_c2h6,c2h2_c2h4){
                 Plotly.newPlot('dga3dplot', traces1, layout1);
                 };
 
-dga3d(1,1,1);
+setInterval(()=>{
+	x=Math.random() * (10 - 0) + 0;
+	y=Math.random() * (10 - 0) + 0;
+	z=Math.random() * (10 - 0) + 0;
+	dga3d(x,y,z);
+}, 10000);
+
+
