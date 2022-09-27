@@ -169,12 +169,40 @@ function dga3d(ch4_h2,c2h4_c2h6,c2h2_c2h4){
 
                 Plotly.newPlot('dga3dplot', traces1, layout1);
                 };
+
+function dga3d_update(ch4_h2,c2h4_c2h6,c2h2_c2h4){
+    // no 0 values because diagram starts from 0.05, 0.005 - for proper log scaling
+    var ch4_h2=Math.max(Number(ch4_h2),0.05);
+    var c2h4_c2h6=Math.max(Number(c2h4_c2h6),0.05);
+    var c2h2_c2h4=Math.max(Number(c2h2_c2h4),0.005);
+    // extend the log maximum value if values are >10
+    var max_ch4_h2=Math.max(10,ch4_h2+0.02);
+    var max_c2h4_c2h6=Math.max(10,c2h4_c2h6+0.02);
+    var max_c2h2_c2h4=Math.max(10,c2h2_c2h4+0.002);
+    x=[[ch4_h2]];
+    y=[[c2h4_c2h6]];
+    z=[[c2h2_c2h4]];
+    var update ={x:x,
+		 y:y,
+		 z:z,
+		 mode:'markers',
+		 type:'scatter3d',
+		 marker:{color:PlotlyColors['point'], size:10, line:{color:'Black', width:2}},
+		 line_color: PlotlyColors['bg'],
+		 opacity:1 }
+
+		graphDiv=document.getElementById('dga3dplot');
+                Plotly.restyle(graphDiv, update, 6);
+                };
+
 dga3d(1,1,1);
+//var data=document.getElementById('dga3dplot').data		
+//console.log(data)		
 setInterval(()=>{
-	x=Math.random() * (10 - 0) + 0;
-	y=Math.random() * (10 - 0) + 0;
-	z=Math.random() * (10 - 0) + 0;
-	dga3d(x,y,z);
+	//var data=document.getElementById('dga3dplot').data
+	var x=Math.random() * (10 - 0) + 0;
+	var y=Math.random() * (10 - 0) + 0;
+	var z=Math.random() * (10 - 0) + 0;
+	//console.log(x,y,z);
+	dga3d_update(x,y,z);
 }, 10000);
-
-
